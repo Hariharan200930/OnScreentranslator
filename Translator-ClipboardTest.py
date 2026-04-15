@@ -28,7 +28,8 @@ def hide_overlay_after_delay(delay):
         overlay.withdraw()  # Hide window
 
     #start overlay hider thread
-    threading.Thread(target=timer, daemon=True).start()
+    hide_timer = threading.Thread(target=timer, daemon=True)
+    hide_timer.start()
 
 #translate and set overlay text
 def update_overlay():
@@ -55,6 +56,7 @@ def update_overlay():
             y = screen_height - height - 40
             overlay.geometry(f"{width}x{height}+{x}+{y}")
 
+            overlay.withdraw()
             overlay.deiconify() #show overlay
             last_text = current_text
             hide_overlay_after_delay(15) #call delay function to close overlay
